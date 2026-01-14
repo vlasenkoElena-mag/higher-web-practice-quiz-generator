@@ -2,17 +2,114 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./assets/logo.svg" />
     <title>Прохождение теста</title>
     <link
       rel="stylesheet"
       href="./css/pages/quiz.css" />
   </head>
   <body>
-    <script
-      type="module"
-      src="./js/pages/quiz.js"></script>
+    <div class="container">
+          <header class="header">
+            <a href="./index.html">
+                <img class="header__logo" src="./assets/logo.svg" alt="Логотип" />
+            </a>
+            <nav class="header__nav">
+              <a class="button button--secondary" href="./quizzes.html">Посмотреть сохранённые квизы</a>
+            </nav>
+            <button class="header__menu-button" type="button">
+              <img class="header__menu-icon" src="./assets/burger.svg" alt="Меню" />
+            </button>
+          </header>
+
+          <main class="main main__container">
+              <section class="quiz">
+                <div class="quiz__head">
+                  <h1 class="quiz__title">Заголовок квиза</h1>
+                  <p class="quiz__description">Описание квиза</p>
+                </div>
+                <div class="quiz__progress">
+                  <div class="quiz__progress-text">Вопрос 1 из 1</div>
+                  <progress class="progress-bar quiz__progress-bar" value="0" max="1"></progress>
+                </div>
+                <div class="quiz__content">
+                  <form class="quiz__form">
+                    <div class="quiz__question"></div>
+                    <!-- </div> -->
+                    <div class="quiz__actions">
+                      <button type="submit" class="button button--primary quiz__submit">Ответить</button>
+                      <button type="button" class="button button--primary quiz__next" hidden>
+                        Следующий вопрос
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </section>
+          </main>
+
+          <template id="single-question-template">
+            <div class="question" data-type="single">
+              <h3 class="question__text"></h3>
+              <p class="question__hint">Выберите один вариант ответа</p>
+              <div class="question__options"></div>
+            </div>
+          </template>
+
+          <template id="multiple-question-template">
+            <div class="question" data-type="multiple">
+              <h3 class="question__text"></h3>
+              <p class="question__hint">Выберите один или несколько вариантов ответа</p>
+              <div class="question__options">
+              </div>
+            </div>
+          </template>
+
+          <template id="option-template">
+            <div class="option">
+              <label class="option__label">
+                <input class="radio option__input" type="radio" name="question" value="" />
+                <span class="option__text"></span>
+              </label>
+              <div class="option__message text text--caption" hidden></div>
+            </div>
+          </template>
+
+          <template id="checkbox-option-template">
+            <div class="option">
+              <label class="option__label">
+                <input class="checkbox option__input" type="checkbox" name="question" value="" />
+                <span class="option__text"></span>
+              </label>
+              <div class="option__message text text--caption" hidden></div>
+            </div>
+          </template>
+
+          <div class="modal" id="result-modal" hidden>
+            <h2 class="modal__title">Тест завершен</h2>
+            <p class="modal__subtitle">Вы ответили правильно на все вопросы</p>
+            <p class="modal__message text text--caption">Ваши знания на высоте</p>
+            <div class="modal__actions">
+              <a class="button button--primary" href="./quizzes.html">К списку квизов</a>
+              <button type="button" class="button button--secondary modal__restart">Пройти снова</button>
+            </div>
+          </div>
+
+          <div class="toast toast--error" id="error-toast" hidden>
+            <div class="toast__icon">&#10060;</div>
+            <div class="toast__content">
+              <p class="toast__title">Ошибка: не удалось обработать JSON.</p>
+              <p class="toast__message text text--caption">Проверьте формат данных и попробуйте снова.</p>
+            </div>
+            <div class="toast__actions">
+              <button type="button" class="button button--secondary toast__action">Продолжить</button>
+            </div>
+          </div>
+
+          <footer class="footer">
+			      <div class="footer__text">Учебный проект 2025</div>
+		      </footer>
+      </div>
+    <script type="module" src="./src/pages/quiz.ts"></script>
   </body>
 </html>
