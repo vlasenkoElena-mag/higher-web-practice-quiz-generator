@@ -3,7 +3,7 @@ import { initDb } from '@/utils/storage';
 import { createQuizzesView } from '@/components/view/quizzes.view.factory';
 import { createQuizCardViewFactory } from '@/components/view/quiz-card-view.factory';
 import { createQuizzesPresenter } from '@/components/presenters/quizzes.presenter.factory';
-import { createQuizzesModel } from '@/components/models/quizzes-mode.factory';
+import { createQuizzesModel } from '@/components/models/quizzes-model.factory';
 import { createErrorView } from '@/components/view/error-message.view.factory';
 
 const db = await initDb();

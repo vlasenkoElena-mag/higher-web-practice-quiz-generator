@@ -5,7 +5,7 @@ import { createQuizGeneratorView } from '@/components/view/quiz-generator.view.f
 import {
     createQuizGeneratorPresenter,
 } from '@/components/presenters/quiz-generator.presenter.factory';
-import { createQuizzesModel } from '@/components/models/quizzes-mode.factory';
+import { createQuizzesModel } from '@/components/models/quizzes-model.factory';
 
 const db = await initDb();
 
