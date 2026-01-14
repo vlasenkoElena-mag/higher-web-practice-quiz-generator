@@ -6,6 +6,7 @@ import {
     createQuizGeneratorPresenter,
 } from '@/components/presenters/quiz-generator.presenter';
 import { createQuizzesModel } from '@/components/models/quizzes-model';
+import { initBurgerMenu } from '@/components/view/burger-menu.view';
 
 const db = await initDb();
 
@@ -18,3 +19,4 @@ const quizGeneratorPresenter = createQuizGeneratorPresenter({
 });
 
 quizGeneratorPresenter.init();
+initBurgerMenu();

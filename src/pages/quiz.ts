@@ -11,6 +11,7 @@ import { createQuizProgressView } from '@/components/view/quiz-progress.view';
 import { createQuizGamePresenter } from '@/components/presenters/quiz-game.presenter';
 import { createQuizGameModel } from '@/components/models/quiz-game.model';
 import { createErrorView } from '@/components/view/error-message.view';
+import { initBurgerMenu } from '@/components/view/burger-menu.view';
 
 const extractUrlQuizId = (): string => {
     const id = getUrlParam('id');
@@ -51,3 +52,4 @@ const quizGamePresenter = createQuizGamePresenter({
 quizGamePresenter.init();
 const db = await initDb();
 model.start(() => db.get(quizId));
+initBurgerMenu();
