@@ -1,0 +1,24 @@
+.quiz {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 767px;
+}
+
+.quiz__title {
+	margin-bottom: 8px;
+}
+
+.quiz__description {
+	color: var(--text-gray);
+}
+
+.quiz__progress-text {
+	color: var(--text-gray);
+	margin-bottom: 4px;
+}
+
+.quiz__question {
+	margin-bottom: 24px;
+}
+

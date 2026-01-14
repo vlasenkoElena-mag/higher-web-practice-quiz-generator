@@ -1,0 +1,39 @@
+:root {
+
+	/* Colors */
+
+	--main-blue: #3b82f6;
+	--main-blue-light: color-mix(in srgb, var(--main-blue) 85%, white);
+	--main-blue-bg: color-mix(in srgb, var(--main-blue) 10%, white);
+
+	--surface-white: #ffffff;
+	--app-background: #f9fafb;
+
+	--text-dark: #111827;
+	--text-gray: #6b7280;
+
+	--border-color: #e5e7eb;
+
+	--green-accent: #10b981;
+	--red-alert: #ef4444;
+	--red-light-bg: color-mix(in srgb, var(--red-alert) 5%, white);
+
+	/* Typography */
+
+	--font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+	--font-code: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+	--text-normal-size: 16px;
+	--text-normal-spacing: 1.5;
+	--text-normal-weight: 400;
+
+	--text-bold-size: 16px;
+	--text-bold-spacing: 1.5;
+	--text-bold-weight: 500;
+
+	--text-small-size: 12px;
+	--text-small-spacing: 1.4;
+
+	--code-text-size: 14px;
+	--code-text-spacing: 1.5;
+}

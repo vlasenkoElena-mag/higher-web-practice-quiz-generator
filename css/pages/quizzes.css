@@ -1,0 +1,11 @@
+@import "../base/variables.css";
+@import "../base/base.css";
+@import "../components/layout.css";
+@import "../components/text.css";
+@import "../components/header.css";
+@import "../components/footer.css";
+@import "../components/main.css";
+@import "../components/button.css";
+@import "../components/link.css";
+@import "../components/card.css";
+@import "../components/quizzes.css";

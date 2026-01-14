@@ -1,0 +1,9 @@
+.link {
+	text-decoration: none;
+	color: var(--main-blue);
+	font-weight: var(--text-bold-weight);
+}
+
+.link:hover {
+	color: var(--main-blue-light);
+}

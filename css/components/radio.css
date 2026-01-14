@@ -1,0 +1,68 @@
+.radio {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	flex-shrink: 0;
+	background-color: var(--surface-white);
+	border: 1px solid var(--main-blue);
+	border-radius: 50%;
+	position: relative;
+	cursor: pointer;
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease;
+}
+
+.radio:checked::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: 12px;
+	height: 12px;
+	background-color: var(--main-blue);
+	border-radius: 50%;
+}
+
+.radio:checked {
+	border-color: var(--main-blue);
+	background-color: var(--surface-white);
+}
+
+.radio:disabled {
+	border-color: var(--border-color);
+	background-color: var(--border-color);
+}
+
+.radio--success {
+	border-color: var(--green-accent) !important;
+	background-color: var(--surface-white) !important;
+}
+
+.radio--success:checked::before {
+	background-color: var(--green-accent);
+	mask-image: url("../../assets/icon-check.svg");
+	-webkit-mask-image: url("../../assets/icon-check.svg");
+}
+
+.radio--error {
+	border-color: var(--red-alert) !important;
+	background-color: var(--surface-white) !important;
+}
+
+.radio--error:checked::before {
+	background-color: var(--red-alert);
+	mask-image: url("../../assets/icon-cross.svg");
+	-webkit-mask-image: url("../../assets/icon-cross.svg");
+}
+
+.radio--success:checked::before,
+.radio--error:checked::before {
+	mask-size: contain;
+	mask-repeat: no-repeat;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+}
