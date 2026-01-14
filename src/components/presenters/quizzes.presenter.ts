@@ -1,6 +1,6 @@
 import type { ErrorView, QuizCardFactory, QuizzesView } from '../view/view.types';
 import type { Initializer } from '@/types/base';
-import type { QuizzesModel } from '../models/quizzes-model.factory';
+import type { QuizzesModel } from '../models/quizzes-model';
 
 type Deps = {
     quizzesView: QuizzesView;

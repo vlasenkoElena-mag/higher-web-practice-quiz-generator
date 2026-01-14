@@ -1,4 +1,4 @@
-import type { QuizResult } from '../models/quiz-game.model.factory';
+import type { QuizResult } from '../models/quiz-game.model';
 import type { ResultInfo } from '../presenters/types';
 
 const CORRECT_PLACEHOLDER = '{{correct}}';

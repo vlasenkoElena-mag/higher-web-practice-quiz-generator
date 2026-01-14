@@ -1,11 +1,11 @@
 import { getFirstElementOrFail } from '@/utils/dom-utils';
 import { initDb } from '@/utils/storage';
-import { createErrorView } from '@/components/view/error-message.view.factory';
-import { createQuizGeneratorView } from '@/components/view/quiz-generator.view.factory';
+import { createErrorView } from '@/components/view/error-message.view';
+import { createQuizGeneratorView } from '@/components/view/quiz-generator.view';
 import {
     createQuizGeneratorPresenter,
-} from '@/components/presenters/quiz-generator.presenter.factory';
-import { createQuizzesModel } from '@/components/models/quizzes-model.factory';
+} from '@/components/presenters/quiz-generator.presenter';
+import { createQuizzesModel } from '@/components/models/quizzes-model';
 
 const db = await initDb();
 

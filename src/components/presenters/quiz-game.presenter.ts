@@ -4,13 +4,13 @@ import type {
     QuizHeaderView,
     QuizProgressView,
 } from '../view/view.types';
-import type { QuizSectionView } from '../view/quiz-section.view.factory';
-import type { QuestionView } from '../view/question.view.factory';
+import type { QuizSectionView } from '../view/quiz-section.view';
+import type { QuestionView } from '../view/question.view';
 import { formatResult } from './format-result-info';
 import type { QuestionOptionsViewFactory } from './question-options-view.factory';
 import type { Question } from '@/types/quiz';
 import type { Initializer } from '@/types/base';
-import type { QuizAnswerResult, QuizGameModel, QuizResult } from '../models/quiz-game.model.factory';
+import type { QuizAnswerResult, QuizGameModel, QuizResult } from '../models/quiz-game.model';
 import { QuizNotFoundError } from '@/errors/quiz-not-found';
 
 type Deps = {

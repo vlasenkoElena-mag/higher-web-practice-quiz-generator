@@ -1,7 +1,7 @@
 import type { Initializer } from '@/types/base';
 import type { ErrorView } from '../view/view.types';
-import type { QuizGeneratorView } from '../view/quiz-generator.view.factory';
-import type { QuizzesModel } from '../models/quizzes-model.factory';
+import type { QuizGeneratorView } from '../view/quiz-generator.view';
+import type { QuizzesModel } from '../models/quizzes-model';
 import { JsonParsingError } from '@/errors/json-parsing.error';
 import { navigateTo } from '@/utils/location.utils';
 

@@ -42,7 +42,7 @@
 
 .header__menu-link {
 	display: block;
-	padding: var(--space-16) var(--space-8);
+	padding: 16px 8px;
 	color: var(--text-dark);
 	text-decoration: none;
 	background-color: inherit;

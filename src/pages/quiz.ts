@@ -3,14 +3,14 @@ import { getFirstElementOrFail, getTemplateFirstChild } from '@/utils/dom-utils'
 import { isNil } from '@/utils/utils';
 import { getUrlParam, navigateTo } from '@/utils/location.utils';
 import { QuestionOptionsViewFactory } from '@/components/presenters/question-options-view.factory';
-import { createQuestionView } from '@/components/view/question.view.factory';
-import { createQuizSectionView } from '@/components/view/quiz-section.view.factory';
-import { createQuizGameResultView } from '@/components/view/quiz-game-result.view.factory';
-import { createQuizHeaderView } from '@/components/view/quiz-header.view.factory';
-import { createQuizProgressView } from '@/components/view/quiz-progress.view.factory';
-import { createQuizGamePresenter } from '@/components/presenters/quiz-game.presenter.factory';
-import { createQuizGameModel } from '@/components/models/quiz-game.model.factory';
-import { createErrorView } from '@/components/view/error-message.view.factory';
+import { createQuestionView } from '@/components/view/question.view';
+import { createQuizSectionView } from '@/components/view/quiz-section.view';
+import { createQuizGameResultView } from '@/components/view/quiz-game-result.view';
+import { createQuizHeaderView } from '@/components/view/quiz-header.view';
+import { createQuizProgressView } from '@/components/view/quiz-progress.view';
+import { createQuizGamePresenter } from '@/components/presenters/quiz-game.presenter';
+import { createQuizGameModel } from '@/components/models/quiz-game.model';
+import { createErrorView } from '@/components/view/error-message.view';
 
 const extractUrlQuizId = (): string => {
     const id = getUrlParam('id');

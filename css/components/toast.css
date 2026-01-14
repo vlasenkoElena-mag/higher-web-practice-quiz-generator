@@ -14,5 +14,5 @@
 }
 
 .toast__content {
-	margin-bottom: var(--space-16);
+	margin-bottom: 16px;
 }
