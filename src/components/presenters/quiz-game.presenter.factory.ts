@@ -5,7 +5,7 @@ import type {
     QuizProgressView,
 } from '../view/view.types';
 import type { QuizSectionView } from '../view/quiz-section.view.factory';
-import type { QuestionView } from '../view/queston.view.factory';
+import type { QuestionView } from '../view/question.view.factory';
 import { formatResult } from './format-result-info';
 import type { QuestionOptionsViewFactory } from './question-options-view.factory';
 import type { Question } from '@/types/quiz';
