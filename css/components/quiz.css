@@ -3,6 +3,7 @@
 	flex-direction: column;
 	gap: 24px;
 	width: 767px;
+	padding: 10px;
 }
 
 .quiz__title {
