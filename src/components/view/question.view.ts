@@ -51,11 +51,20 @@ export const createQuestionView = ({ element }: Deps): QuestionView => {
         form.reset();
     };
 
+    const disableFormInputs = (): void => {
+        Array.from(form.elements).forEach(element => {
+            if (element instanceof HTMLInputElement) {
+                element.disabled = true;
+            }
+        });
+    }
+
     const renderAnsweredQuestion: QuestionView['renderAnsweredQuestion'] = ({ questionElement, nextButtonText }) => {
         questionContainer.replaceChildren(questionElement);
         submitButton.hidden = true;
         nextButton.hidden = false;
         nextButton.textContent = nextButtonText;
+        disableFormInputs();
     };
 
     return {
