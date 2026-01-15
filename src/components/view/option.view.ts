@@ -15,8 +15,8 @@ export const createOptionView = (element: HTMLElement): OptionView => {
     };
 
     const setResult = (result: Required<AnsweredOptionViewData>['result']) => {
-        label.classList.remove('option__label--success', 'option__label--error');
-        input.classList.remove('checkbox--success', 'checkbox--error', 'radio--success', 'radio--error');
+        label.classList.remove('option__label_success', 'option__label_error');
+        input.classList.remove('checkbox_success', 'checkbox_error', 'radio_success', 'radio_error');
 
         message.hidden = false;
         message.textContent = result.message;
@@ -25,10 +25,10 @@ export const createOptionView = (element: HTMLElement): OptionView => {
         label.classList.add(`option__label--${modifier}`);
 
         if (input.classList.contains('checkbox')) {
-            input.classList.add(`checkbox--${modifier}`);
+            input.classList.add(`checkbox_${modifier}`);
         }
         else if (input.classList.contains('radio')) {
-            input.classList.add(`radio--${modifier}`);
+            input.classList.add(`radio_${modifier}`);
         }
     };
 

@@ -14,13 +14,11 @@ export const createQuizGameResultView = ({ element }: Deps): QuizGameResultView 
     const restartButton = getFirstElementOrFail('.modal__restart', element) as HTMLButtonElement;
 
     const show = () => {
-        element.hidden = false;
-        element.classList.add('modal--open');
+        element.classList.add('modal_active');
     };
 
     const hide = () => {
-        element.hidden = true;
-        element.classList.remove('modal--open');
+        element.classList.remove('modal_active');
     };
 
     restartButton.addEventListener('click', () => {
