@@ -6,15 +6,18 @@ export const createErrorView = (element: HTMLElement): Renderer<ErrorDescription
     const messageElement = getFirstElementOrFail('.toast__title', element);
     const detailsElement = getFirstElementOrFail('.toast__message', element);
     const hideButton = getFirstElementOrFail('.toast__action', element) as HTMLButtonElement;
+    const overlayElement: HTMLElement | null = document.getElementById('toast-overlay');
 
     const show = () => {
         element.hidden = false;
-        element.classList.add('toast--visible');
+        overlayElement?.classList.add('active');
+        document.body.classList.add('toast-open');
     };
 
     const hide = () => {
         element.hidden = true;
-        element.classList.remove('toast--visible');
+        overlayElement?.classList.remove('active');
+        document.body.classList.remove('toast-open');
     };
 
     const setDescription = ({ message, details }: ErrorDescription) => {
