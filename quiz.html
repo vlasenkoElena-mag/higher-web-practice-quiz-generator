@@ -16,7 +16,7 @@
                 <img class="header__logo" src="./assets/logo.svg" alt="Логотип" />
             </a>
             <nav class="header__nav">
-              <a class="button button--secondary" href="./quizzes.html">Посмотреть сохранённые квизы</a>
+              <a class="button button_secondary" href="./quizzes.html">Посмотреть сохранённые квизы</a>
             </nav>
             <button class="header__menu-button" type="button">
               <img class="header__menu-icon" src="./assets/burger.svg" alt="Меню" />
@@ -36,10 +36,9 @@
                 <div class="quiz__content">
                   <form class="quiz__form">
                     <div class="quiz__question"></div>
-                    <!-- </div> -->
                     <div class="quiz__actions">
-                      <button type="submit" class="button button--primary quiz__submit">Ответить</button>
-                      <button type="button" class="button button--primary quiz__next" hidden>
+                      <button type="submit" class="button button_primary quiz__submit">Ответить</button>
+                      <button type="button" class="button button_primary quiz__next" hidden>
                         Следующий вопрос
                       </button>
                     </div>
@@ -78,7 +77,7 @@
                 <input class="radio option__input" type="radio" name="question" value="" />
                 <span class="option__text"></span>
               </label>
-              <div class="option__message text text--caption" hidden></div>
+              <div class="option__message text text_caption" hidden></div>
             </div>
           </template>
 
@@ -88,28 +87,30 @@
                 <input class="checkbox option__input" type="checkbox" name="question" value="" />
                 <span class="option__text"></span>
               </label>
-              <div class="option__message text text--caption" hidden></div>
+              <div class="option__message text text_caption" hidden></div>
             </div>
           </template>
 
           <div class="modal" id="result-modal" hidden>
-            <h2 class="modal__title">Тест завершен</h2>
-            <p class="modal__subtitle">Вы ответили правильно на все вопросы</p>
-            <p class="modal__message text text--caption">Ваши знания на высоте</p>
-            <div class="modal__actions">
-              <a class="button button--primary" href="./quizzes.html">К списку квизов</a>
-              <button type="button" class="button button--secondary modal__restart">Пройти снова</button>
+            <div class="modal__content">
+                <h2 class="modal__title">Тест завершен</h2>
+                <p class="modal__subtitle">Вы ответили правильно на все вопросы</p>
+                <p class="modal__message text text_caption">Ваши знания на высоте</p>
+                <div class="modal__actions">
+                  <a class="button button_primary" href="./quizzes.html">К списку квизов</a>
+                  <button type="button" class="button button_secondary modal__restart">Пройти снова</button>
+                </div>
             </div>
           </div>
 
-          <div class="toast toast--error" id="error-toast" hidden>
+          <div class="toast toast__error" id="error-toast" hidden>
             <div class="toast__icon">&#10060;</div>
             <div class="toast__content">
               <p class="toast__title">Ошибка: не удалось обработать JSON.</p>
-              <p class="toast__message text text--caption">Проверьте формат данных и попробуйте снова.</p>
+              <p class="toast__message text text_caption">Проверьте формат данных и попробуйте снова.</p>
             </div>
             <div class="toast__actions">
-              <button type="button" class="button button--secondary toast__action">Продолжить</button>
+              <button type="button" class="button button_secondary toast__action">Продолжить</button>
             </div>
           </div>
 

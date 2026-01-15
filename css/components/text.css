@@ -3,20 +3,14 @@
 	color: inherit;
 }
 
-.text--caption {
+.text_caption {
 	font-size: var(--text-small-size);
 	line-height: var(--text-small-spacing);
 	color: var(--text-gray);
 }
 
-.text--mono {
+.text_mono {
 	font-family: var(--font-code);
 	font-size: var(--code-text-size);
 	line-height: var(--code-text-spacing);
-}
-
-.text--body-accent {
-	font-size: var(--text-bold-size);
-	line-height: var(--text-bold-spacing);
-	font-weight: var(--text-bold-weight);
 }

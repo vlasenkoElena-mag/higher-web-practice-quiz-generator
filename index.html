@@ -16,7 +16,7 @@
                 <img class="header__logo" src="./assets/logo.svg" alt="Логотип" />
             </a>
             <nav class="header__nav">
-              <a class="button button--secondary" href="./quizzes.html">Посмотреть сохранённые квизы</a>
+              <a class="button button_secondary" href="./quizzes.html">Посмотреть сохранённые квизы</a>
             </nav>
             <button class="header__menu-button" type="button">
               <img class="header__menu-icon" src="./assets/burger.svg" alt="Меню" />
@@ -27,28 +27,28 @@
               <section class="generator">
                 <h1 class="generator__title">Генератор квизов</h1>
                 <p class="generator__hint">Вставьте JSON...</p>
-                <p class="generator__label text text--caption">Ваш JSON</p>
+                <p class="generator__label text text_caption">Ваш JSON</p>
                 <form class="generator__form">
                   <textarea
                     id="quiz-json-input"
                     name="quiz-json-input"
-                    class="generator__textarea text text--mono"
+                    class="generator__textarea text text_mono"
                     placeholder="{&#10;&laquo;title&raquo;: &laquo;Placeholder&raquo;,&#10;&laquo;questions&raquo;: []&#10;}"
                   ></textarea>
                   <div class="generator__button">
-                    <button type="submit" class="button button--primary">Сгенерировать</button>
+                    <button type="submit" class="button button_primary">Сгенерировать</button>
                   </div>
                 </form>
               </section>
 
-              <div class="toast toast--error" id="error-toast" hidden>
+              <div class="toast toast__error" id="error-toast" hidden>
 				        <div class="toast__icon">&#10060;</div>
                 <div class="toast__content">
                   <p class="toast__title">Ошибка: не удалось обработать JSON.</p>
-                  <p class="toast__message text text--caption">Проверьте формат данных и попробуйте снова.</p>
+                  <p class="toast__message text text_caption">Проверьте формат данных и попробуйте снова.</p>
                 </div>
                 <div class="toast__actions">
-                  <button type="button" class="button button--secondary toast__action">Продолжить</button>
+                  <button type="button" class="button button_secondary toast__action">Продолжить</button>
                 </div>
               </div>
 
@@ -60,6 +60,7 @@
               </div>
 			  </main>
       </div>
+    <div class="toast-overlay" id="toast-overlay"></div>
     <script type="module" src="./src/pages/main.ts"></script>
   </body>
 </html>

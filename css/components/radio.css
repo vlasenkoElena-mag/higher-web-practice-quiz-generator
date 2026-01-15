@@ -35,30 +35,30 @@
 	background-color: var(--border-color);
 }
 
-.radio--success {
+.radio_success {
 	border-color: var(--green-accent) !important;
 	background-color: var(--surface-white) !important;
 }
 
-.radio--success:checked::before {
+.radio_success:checked::before {
 	background-color: var(--green-accent);
 	mask-image: url("../../assets/icon-check.svg");
 	-webkit-mask-image: url("../../assets/icon-check.svg");
 }
 
-.radio--error {
+.radio_error {
 	border-color: var(--red-alert) !important;
 	background-color: var(--surface-white) !important;
 }
 
-.radio--error:checked::before {
+.radio_error:checked::before {
 	background-color: var(--red-alert);
 	mask-image: url("../../assets/icon-cross.svg");
 	-webkit-mask-image: url("../../assets/icon-cross.svg");
 }
 
-.radio--success:checked::before,
-.radio--error:checked::before {
+.radio_success:checked::before,
+.radio_error:checked::before {
 	mask-size: contain;
 	mask-repeat: no-repeat;
 	mask-position: center;
