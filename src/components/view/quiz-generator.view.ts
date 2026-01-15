@@ -28,8 +28,8 @@ export const createQuizGeneratorView = (element: HTMLElement): QuizGeneratorView
     const form = getFirstElementOrFail('.generator__form', element) as HTMLFormElement;
     const textarea = getFirstElementOrFail('#quiz-json-input', form) as HTMLTextAreaElement;
 
-    const toValid = () => textarea.classList.remove('generator__textarea--error');
-    const toInvalid = () => textarea.classList.add('generator__textarea--error');
+    const toValid = () => textarea.classList.remove('generator__textarea_error');
+    const toInvalid = () => textarea.classList.add('generator__textarea_error');
 
     form.addEventListener('submit', event => {
         event.preventDefault();

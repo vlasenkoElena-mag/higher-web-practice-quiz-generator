@@ -47,7 +47,7 @@
 	outline: 2px solid var(--main-blue);
 }
 
-.generator__textarea--error {
+.generator__textarea_error {
 	outline: 2px solid var(--red-alert);
 }
 
