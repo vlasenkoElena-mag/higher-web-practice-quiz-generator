@@ -1,5 +1,4 @@
 import { v7 as uuidV7 } from 'uuid';
-import { Either } from '@/utils/fp/tuple-based-either';
 import { QuizAddingError } from '@/errors/quiz-adding.error';
 import type { Observable, QuizStorage } from '@/types/base';
 import type { Quiz, QuizData } from '@/types/quiz';
@@ -37,10 +36,13 @@ export const createQuizzesModel = ({ db }: QuizzesModelDeps): QuizzesModel => {
     };
 
     const loadQuizzes: QuizzesModel['loadQuizzes'] = async (): Promise<void> => {
-        await db.getList().then(Either.match(
-            err => ee.emit('quizzes_loading_error', err),
-            quizzes => ee.emit('quizzes_loaded', { quizzes }),
-        ));
+        const [err, quizzes] = await db.getList();
+
+        if (err !== null) {
+            return ee.emit('quizzes_loading_error', err);
+        }
+
+        ee.emit('quizzes_loaded', { quizzes })
     };
 
     return { add, loadQuizzes, on: ee.on };

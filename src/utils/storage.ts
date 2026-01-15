@@ -1,11 +1,10 @@
 import { type DBSchema, type IDBPDatabase, openDB } from 'idb';
 import { v7 as uuidV7 } from 'uuid';
 import { isNil } from './utils';
-import { Either } from './fp/tuple-based-either';
-import { makeNotFoundResult } from '@/errors/quiz-not-found';
-import { makeQuizGettingErrorResult } from '@/errors/quiz-getting-error';
-import { makeQuizAddingErrorResult } from '@/errors/quiz-adding.error';
-import { makeQuizzesLoadingErrorResult } from '@/errors/quizzes-loading.error';
+import { QuizNotFoundError } from '@/errors/quiz-not-found';
+import { QuizGettingError } from '@/errors/quiz-getting-error';
+import { QuizAddingError } from '@/errors/quiz-adding.error';
+import { QuizzesLoadingError } from '@/errors/quizzes-loading.error';
 import type { Quiz, QuizData } from '@/types/quiz';
 import type { AddQuizResult, GetQuizResult, LoadQuizzesResult, QuizStorage } from '@/types/base';
 
@@ -49,20 +48,20 @@ class QuizIndexedDbStorage implements QuizStorage {
             const quiz: Quiz = { id: uuidV7(), ...quizData };
             await this.#db.put(SCHEMA_NAME, quiz);
 
-            return Either.right(quiz);
+            return [null, quiz];
         }
         catch (error) {
-            return makeQuizAddingErrorResult(error);
+            return [new QuizAddingError(error), null];
         }
     }
 
     async get(id: string): Promise<GetQuizResult> {
         try {
             const quiz = await this.#db.get(SCHEMA_NAME, id);
-            return isNil(quiz) ? makeNotFoundResult(id) : Either.right(quiz as Quiz);
+            return isNil(quiz) ? [new QuizNotFoundError(id), null] : [null, quiz];
         }
         catch (error) {
-            return makeQuizGettingErrorResult(error);
+            return [new QuizGettingError(error), null];
         }
     }
 
@@ -70,10 +69,10 @@ class QuizIndexedDbStorage implements QuizStorage {
         try {
             const quizzes = await this.#db.getAll(SCHEMA_NAME);
 
-            return Either.right(quizzes);
+            return [null, quizzes];
         }
         catch (error) {
-            return makeQuizzesLoadingErrorResult(error);
+            return [new QuizzesLoadingError(error), null];
         }
     }
 

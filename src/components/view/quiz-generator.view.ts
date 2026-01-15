@@ -1,12 +1,11 @@
 import { getFirstElementOrFail } from '@/utils/dom-utils';
 import { makeValidator, parseJsonObject } from '@/utils/validation';
 import { quizSchema } from '@/schemas/quiz';
-import { Either } from '@/utils/fp/tuple-based-either';
 import { createEventEmitter } from '@/utils/event-emitter';
 import type { JsonParsingError } from '@/errors/json-parsing.error';
 import type { ValidationError } from '@/errors/validation.error';
 import type { Observable } from '@/types/base';
-import type { QuizData } from '@/types/quiz';
+import type { Quiz, QuizData } from '@/types/quiz';
 
 export type QuizGeneratorViewEvents = {
     ['submit']: { quiz: QuizData; };
@@ -19,8 +18,23 @@ export type QuizGeneratorView = Observable<QuizGeneratorViewEvents> & {
 
 const validateQuizJson = makeValidator(quizSchema);
 
-const safeParseQuizJson = (jsonString: string) =>
-    Either.chain(validateQuizJson, parseJsonObject(jsonString));
+type SafeParseResult = [JsonParsingError | ValidationError, null] | [null, QuizData];
+
+const safeParseQuizJson = (jsonString: string): SafeParseResult =>  {
+    const [parsingErr, parsed] = parseJsonObject(jsonString);
+
+    if (parsingErr !== null) {
+        return [parsingErr, null];
+    }
+
+    const [validationErr, quiz] = validateQuizJson(parsed);
+
+    if (validationErr !== null) {
+        return [validationErr, null];
+    }
+
+    return [null, quiz];
+};
 
 export const createQuizGeneratorView = (element: HTMLElement): QuizGeneratorView => {
     const ee = createEventEmitter<QuizGeneratorViewEvents>();
@@ -33,15 +47,14 @@ export const createQuizGeneratorView = (element: HTMLElement): QuizGeneratorView
 
     form.addEventListener('submit', event => {
         event.preventDefault();
-        const validationResult = safeParseQuizJson(textarea.value);
-        Either.match(
-            err => {
-                toInvalid();
-                ee.emit('validation_error', err);
-            },
-            quiz => ee.emit('submit', { quiz }),
-            validationResult,
-        );
+        const [err, quiz] = safeParseQuizJson(textarea.value);
+
+        if (err !== null) {
+            toInvalid();
+            return ee.emit('validation_error', err);
+        }
+
+        ee.emit('submit', { quiz })
     });
 
     textarea.addEventListener('input', () => {

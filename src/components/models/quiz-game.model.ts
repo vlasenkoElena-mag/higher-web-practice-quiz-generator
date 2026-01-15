@@ -2,7 +2,6 @@ import type { QuizGettingError } from '@/errors/quiz-getting-error';
 import type { GetQuizResult, Observable } from '@/types/base';
 import type { OptionId, Question, QuestionOption, Quiz } from '@/types/quiz';
 import { createEventEmitter } from '@/utils/event-emitter';
-import { Either } from '@/utils/fp/tuple-based-either';
 import { isNil } from '@/utils/utils';
 
 export type OptionDetails = {
@@ -55,18 +54,14 @@ export const createQuizGameModel = (): QuizGameModel => {
     const ee = createEventEmitter<QuizGameEvents>();
 
     const start: I['start'] = async (getQuiz): Promise<void> => {
-        await getQuiz()
-            .then(
-                Either.match(
-                    err => ee.emit('quiz_getting_error', err),
-                    loadedQuiz => {
-                        quiz = loadedQuiz;
-                        return ee.emit('quiz_started', { quiz });
-                    },
-                ),
-            );
+        const [err, loadedQuiz]  = await getQuiz()
 
-        ee.emit('quiz_started', { quiz: quiz });
+        if (err !== null) {
+            return ee.emit('quiz_getting_error', err);
+        }
+
+        quiz = loadedQuiz;
+        ee.emit('quiz_started', { quiz: loadedQuiz });
         publishQuestion();
     };
 
