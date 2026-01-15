@@ -22,7 +22,7 @@ export const createQuizzesPresenter = (deps: Deps): Initializer => {
             quizzesView.clear();
             errorView.render({
                 message: 'Ошибка: Не удалось загрузить квизы.',
-                details: 'Произошла неизвестная ошибка при загрузке квизов.', // TODO: add real error handling
+                details: 'Произошла неизвестная ошибка при загрузке квизов.',
             });
         });
 
