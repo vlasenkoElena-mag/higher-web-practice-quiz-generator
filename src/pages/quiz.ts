@@ -2,7 +2,7 @@ import { initDb } from '@/utils/storage';
 import { getFirstElementOrFail, getTemplateFirstChild } from '@/utils/dom-utils';
 import { isNil } from '@/utils/utils';
 import { getUrlParam, navigateTo } from '@/utils/location.utils';
-import { createOptionsViewFactory } from '@/components/presenters/options-view-factory';
+import { createOptionsViewFactory } from '@/components/view/options-view-factory';
 import { createQuestionView } from '@/components/view/question.view';
 import { createQuizSectionView } from '@/components/view/quiz-section.view';
 import { createQuizGameResultView } from '@/components/view/quiz-game-result.view';

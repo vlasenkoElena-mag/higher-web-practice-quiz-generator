@@ -1,4 +1,3 @@
-import type { ResultInfo } from '../presenters/types';
 import type { Quiz, QuizId } from '@/types/quiz';
 import type { Observable, Renderable, Renderer } from '@/types/base';
 import type {
@@ -45,3 +44,10 @@ export type ErrorView = Renderer<ErrorDescription>;
 export type QuizHeaderView = Renderer<QuizHeadViewData>;
 
 export type QuizProgressView = Renderer<Progress>;
+
+export type ResultInfo = {
+    title: string;
+    details: string;
+    summary: string;
+};
+
