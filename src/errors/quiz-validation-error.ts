@@ -1,4 +1,4 @@
-export class ValidationError extends Error {
+export class QuizValidationError extends Error {
     constructor(message?: string) {
         super(`Quiz validation error: ${message}`);
     }
