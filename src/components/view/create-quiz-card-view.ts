@@ -1,6 +1,6 @@
 import type { Quiz } from '@/types/quiz';
-import type { QuizCardView } from './view.types';
-import { createQuizCardView } from './quiz-card.view';
+import type { QuizCardView } from './view-types';
+import { createQuizCardView } from './quiz-card-view';
 
 type Deps = {
     quizCardTemplate: HTMLElement;

@@ -1,5 +1,5 @@
 import { getFirstElementOrFail, getTemplateFirstChild } from '@/utils/dom-utils';
-import type { QuizCardView, QuizCardViewEvents, QuizzesView } from './view.types';
+import type { QuizCardView, QuizCardViewEvents, QuizzesView } from './view-types';
 import { createEventEmitter } from '@/utils/event-emitter';
 
 export const createQuizzesView = (): QuizzesView => {

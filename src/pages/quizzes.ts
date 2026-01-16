@@ -1,11 +1,11 @@
 import { getFirstElementOrFail, getTemplateFirstChild } from '../utils/dom-utils';
 import { initDb } from '@/utils/storage';
-import { createQuizzesView } from '@/components/view/quizzes.view';
+import { createQuizzesView } from '@/components/view/quizzes-view';
 import { createQuizCardViewFactory } from '@/components/view/create-quiz-card-view';
-import { createQuizzesPresenter } from '@/components/presenters/quizzes.presenter';
+import { createQuizzesPresenter } from '@/components/presenters/quizzes-presenter';
 import { createQuizzesModel } from '@/components/models/quizzes-model';
-import { createErrorView } from '@/components/view/error-message.view';
-import { initBurgerMenu } from '@/components/view/burger-menu.view';
+import { createErrorView } from '@/components/view/error-message-view';
+import { initBurgerMenu } from '@/components/view/burger-menu-view';
 
 const db = await initDb();
 const model = createQuizzesModel({ db });

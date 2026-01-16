@@ -1,9 +1,9 @@
 import type { Question } from '@/types/quiz';
-import type { OptionView, OptionsView } from './view.types';
-import { createOptionView } from './option.view';
+import type { OptionView, OptionsView } from './view-types';
+import { createOptionView } from './option-view';
 import type { QuestionOptionsData } from '@/types/view';
 import { getFirstElementOrFail } from '@/utils/dom-utils';
-import type { QuizAnswerResult } from '../models/quiz-game.model';
+import type { QuizAnswerResult } from '../models/quiz-game-model';
 
 type Deps = {
     singleQuestionTemplate: HTMLElement;

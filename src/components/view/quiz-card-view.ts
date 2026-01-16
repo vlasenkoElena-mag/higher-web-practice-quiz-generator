@@ -1,6 +1,6 @@
 import type { Quiz, QuizId } from '@/types/quiz';
 import { getFirstElementOrFail } from '@/utils/dom-utils';
-import type { QuizCardView, QuizCardViewEvents } from './view.types';
+import type { QuizCardView, QuizCardViewEvents } from './view-types';
 import { createEventEmitter } from '@/utils/event-emitter';
 
 type Deps = {

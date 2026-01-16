@@ -1,6 +1,6 @@
 import type { Initializer } from '@/types/base';
-import type { ErrorView } from '../view/view.types';
-import type { QuizGeneratorView } from '../view/quiz-generator.view';
+import type { ErrorView } from '../view/view-types';
+import type { QuizGeneratorView } from '../view/quiz-generator-view';
 import type { QuizzesModel } from '../models/quizzes-model';
 import { IllegalJsonError } from '@/errors/illegal-json-error';
 import { navigateTo } from '@/utils/location.utils';

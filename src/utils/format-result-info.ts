@@ -1,5 +1,5 @@
-import type { QuizResult } from '../components/models/quiz-game.model';
-import type { ResultInfo } from '@/components/view/view.types';
+import type { QuizResult } from '../components/models/quiz-game-model';
+import type { ResultInfo } from '@/components/view/view-types';
 
 const CORRECT_PLACEHOLDER = '{{correct}}';
 const TOTAL_PLACEHOLDER = '{{total}}';

@@ -1,7 +1,7 @@
 import type { AnsweredOptionViewData, OptionViewData } from '@/types/view';
 import { getFirstElementOrFail } from '@/utils/dom-utils';
 import { isNil } from '@/utils/utils';
-import type { OptionView } from './view.types';
+import type { OptionView } from './view-types';
 
 export const createOptionView = (element: HTMLElement): OptionView => {
     const input = getFirstElementOrFail('.option__input', element) as HTMLInputElement;

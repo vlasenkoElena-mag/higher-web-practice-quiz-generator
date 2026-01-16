@@ -3,14 +3,14 @@ import type {
     QuizGameResultView,
     QuizHeaderView,
     QuizProgressView,
-} from '../view/view.types';
-import type { QuizSectionView } from '../view/quiz-section.view';
-import type { QuestionView } from '../view/question.view';
+} from '../view/view-types';
+import type { QuizSectionView } from '../view/quiz-section-view';
+import type { QuestionView } from '../view/question-view';
 import { formatResult } from '../../utils/format-result-info';
 import type { OptionsViewFactory } from '../view/options-view-factory';
 import type { Question } from '@/types/quiz';
 import type { Initializer } from '@/types/base';
-import type { QuizAnswerResult, QuizGameModel, QuizResult } from '../models/quiz-game.model';
+import type { QuizAnswerResult, QuizGameModel, QuizResult } from '../models/quiz-game-model';
 import { QuizNotFoundError } from '@/errors/quiz-not-found';
 
 type Deps = {

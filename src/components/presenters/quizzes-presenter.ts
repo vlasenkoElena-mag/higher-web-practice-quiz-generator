@@ -1,4 +1,4 @@
-import type { ErrorView, QuizCardFactory, QuizzesView } from '../view/view.types';
+import type { ErrorView, QuizCardFactory, QuizzesView } from '../view/view-types';
 import type { Initializer } from '@/types/base';
 import type { QuizzesModel } from '../models/quizzes-model';
 
