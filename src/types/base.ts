@@ -1,8 +1,8 @@
-import type { QuizGettingError } from '@/errors/quiz-getting-error';
+import type { GetQuizError } from '@/errors/get-quiz-error';
 import type { QuizNotFoundError } from '@/errors/quiz-not-found';
 import type { Quiz, QuizData } from './quiz';
-import type { QuizzesLoadingError } from '@/errors/quizzes-loading.error';
-import type { QuizAddingError } from '@/errors/quiz-adding.error';
+import type { LoadQuizListError } from '@/errors/load-quiz-list-error';
+import type { AddQuizError } from '@/errors/add-auiz-error';
 
 export type EventName<T extends object> = keyof T;
 
@@ -38,12 +38,12 @@ export type EventBus<Messages extends object> = {
     reset(): void;
 };
 
-export type GetQuizResult = [QuizGettingError | QuizNotFoundError, null] | [null, Quiz];
-export type LoadQuizzesResult = [QuizzesLoadingError, null] | [null, Quiz[]];
-export type AddQuizResult = [QuizAddingError, null] | [null, Quiz];
+export type GetQuizResult = [GetQuizError | QuizNotFoundError, null] | [null, Quiz];
+export type LoadQuizzesResult = [LoadQuizListError, null] | [null, Quiz[]];
+export type AddQuizResult = [AddQuizError, null] | [null, Quiz];
 
 export type QuizStorage = {
     add(quiz: QuizData): Promise<AddQuizResult>;
     get(id: string): Promise<GetQuizResult>;
-    getList(): Promise<LoadQuizzesResult>;
+    getAll(): Promise<LoadQuizzesResult>;
 };

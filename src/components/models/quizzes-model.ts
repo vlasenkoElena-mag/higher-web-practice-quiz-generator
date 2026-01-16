@@ -1,15 +1,15 @@
 import { v7 as uuidV7 } from 'uuid';
-import { QuizAddingError } from '@/errors/quiz-adding.error';
+import { AddQuizError } from '@/errors/add-auiz-error';
 import type { Observable, QuizStorage } from '@/types/base';
 import type { Quiz, QuizData } from '@/types/quiz';
-import type { QuizzesLoadingError } from '@/errors/quizzes-loading.error';
+import type { LoadQuizListError } from '@/errors/load-quiz-list-error';
 import { createEventEmitter } from '@/utils/event-emitter';
 
 export type EventsMap = {
     ['quizzes_loaded']: { quizzes: Quiz[] };
     ['quiz_added']: { quiz: Quiz };
-    ['quiz_adding_error']: QuizAddingError;
-    ['quizzes_loading_error']: QuizzesLoadingError;
+    ['quiz_adding_error']: AddQuizError;
+    ['quizzes_loading_error']: LoadQuizListError;
 };
 
 export type QuizzesModel = Observable<EventsMap> & {
@@ -31,12 +31,12 @@ export const createQuizzesModel = ({ db }: QuizzesModelDeps): QuizzesModel => {
             ee.emit('quiz_added', { quiz });
         }
         catch (error) {
-            ee.emit('quiz_adding_error', new QuizAddingError(error));
+            ee.emit('quiz_adding_error', new AddQuizError(error));
         }
     };
 
     const loadQuizzes: QuizzesModel['loadQuizzes'] = async (): Promise<void> => {
-        const [err, quizzes] = await db.getList();
+        const [err, quizzes] = await db.getAll();
 
         if (err !== null) {
             return ee.emit('quizzes_loading_error', err);

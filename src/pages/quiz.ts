@@ -2,7 +2,7 @@ import { initDb } from '@/utils/storage';
 import { getFirstElementOrFail, getTemplateFirstChild } from '@/utils/dom-utils';
 import { isNil } from '@/utils/utils';
 import { getUrlParam, navigateTo } from '@/utils/location.utils';
-import { QuestionOptionsViewFactory } from '@/components/presenters/question-options-view.factory';
+import { createOptionsViewFactory } from '@/components/presenters/options-view-factory';
 import { createQuestionView } from '@/components/view/question.view';
 import { createQuizSectionView } from '@/components/view/quiz-section.view';
 import { createQuizGameResultView } from '@/components/view/quiz-game-result.view';
@@ -32,7 +32,7 @@ const quizContent = getFirstElementOrFail('.quiz__content', quizSection);
 const model = createQuizGameModel();
 
 const quizGamePresenter = createQuizGamePresenter({
-    questionOptionsViewFactory: new QuestionOptionsViewFactory({
+    questionOptionsViewFactory: createOptionsViewFactory({
         singleQuestionTemplate: getTemplateFirstChild('single-question-template'),
         multipleQuestionTemplate: getTemplateFirstChild('multiple-question-template'),
         radioOptionTemplate: getTemplateFirstChild('option-template'),

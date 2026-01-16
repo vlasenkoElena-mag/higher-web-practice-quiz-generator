@@ -7,7 +7,7 @@ import type {
 import type { QuizSectionView } from '../view/quiz-section.view';
 import type { QuestionView } from '../view/question.view';
 import { formatResult } from './format-result-info';
-import type { QuestionOptionsViewFactory } from './question-options-view.factory';
+import type { OptionsViewFactory } from './options-view-factory';
 import type { Question } from '@/types/quiz';
 import type { Initializer } from '@/types/base';
 import type { QuizAnswerResult, QuizGameModel, QuizResult } from '../models/quiz-game.model';
@@ -21,7 +21,7 @@ type Deps = {
     quizGameResultView: QuizGameResultView;
     quizHeaderView: QuizHeaderView;
     errorView: ErrorView;
-    questionOptionsViewFactory: QuestionOptionsViewFactory;
+    questionOptionsViewFactory: OptionsViewFactory;
 };
 
 const QUESTION_URL_PARAM = 'question';
@@ -110,7 +110,7 @@ export const createQuizGamePresenter = (deps: Deps): Initializer => {
     };
 
     const renderQuestion = (question: Question) => {
-        const questionOptionsView = questionOptionsViewFactory.makeQuestionOptionsView(question);
+        const questionOptionsView = questionOptionsViewFactory.createOptionsView(question);
 
         questionView.renderQuestion({
             questionElement: questionOptionsView.element,
@@ -123,7 +123,7 @@ export const createQuizGamePresenter = (deps: Deps): Initializer => {
         result: QuizAnswerResult,
         isLast: boolean,
     ) => {
-        const questionOptionsView = questionOptionsViewFactory.makeAnsweredQuestionOptionsView({
+        const questionOptionsView = questionOptionsViewFactory.createMarkedOptionsView({
             question,
             selectedOptions: answer,
             details: result.details,

@@ -1,8 +1,8 @@
 import type { QuestionOptionsData } from '@/types/view';
 import { getFirstElementOrFail } from '@/utils/dom-utils';
-import type { QuestionOptionsView } from './view.types';
+import type { OptionsView } from './view.types';
 
-export const createQuestionOptionsView = (element: HTMLElement): QuestionOptionsView => {
+export const createQuestionOptionsView = (element: HTMLElement): OptionsView => {
     const questionText = getFirstElementOrFail('.question__text', element);
     const optionsContainer = getFirstElementOrFail('.question__options', element);
 

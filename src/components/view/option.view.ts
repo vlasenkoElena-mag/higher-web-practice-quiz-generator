@@ -21,7 +21,7 @@ export const createOptionView = (element: HTMLElement): OptionView => {
         message.hidden = false;
         message.textContent = result.message;
 
-        const modifier = result.ok ? 'success' : 'error';
+        const modifier = result.isSuccess ? 'success' : 'error';
         label.classList.add(`option__label_${modifier}`);
 
         if (input.classList.contains('checkbox')) {

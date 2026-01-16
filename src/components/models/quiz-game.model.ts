@@ -1,4 +1,4 @@
-import type { QuizGettingError } from '@/errors/quiz-getting-error';
+import type { GetQuizError } from '@/errors/get-quiz-error';
 import type { GetQuizResult, Observable } from '@/types/base';
 import type { OptionId, Question, QuestionOption, Quiz } from '@/types/quiz';
 import { createEventEmitter } from '@/utils/event-emitter';
@@ -6,7 +6,7 @@ import { isNil } from '@/utils/utils';
 
 export type OptionDetails = {
     message: string;
-    ok: boolean;
+    isSuccess: boolean;
 };
 
 export type QuizResult = {
@@ -15,12 +15,12 @@ export type QuizResult = {
 };
 
 export type QuizAnswerResult = {
-    ok: boolean;
+    isCorrect: boolean;
     details: Map<OptionId, OptionDetails>;
 };
 
 export type QuizGameEvents = {
-    ['quiz_getting_error']: QuizGettingError;
+    ['quiz_getting_error']: GetQuizError;
     ['quiz_started']: { quiz: Quiz };
     ['question_ready']: {
         question: Question;
@@ -78,7 +78,7 @@ export const createQuizGameModel = (): QuizGameModel => {
 
         const result = getResult(question, selectedOptionIds);
 
-        if (result.ok) {
+        if (result.isCorrect) {
             correctAnswers += 1;
         }
 
@@ -146,13 +146,13 @@ export const createQuizGameModel = (): QuizGameModel => {
     const getResult = (question: Question, selectedOptionIds: Set<number>): QuizAnswerResult => {
         const correctIds = getCorrectOptionIds(question);
 
-        const ok = selectedOptionIds.size === correctIds.size
+        const isCorrect = selectedOptionIds.size === correctIds.size
           && [...selectedOptionIds].every(id => correctIds.has(id));
 
         const resultOptions = question.options.filter(option => option.correct || selectedOptionIds.has(option.id));
         const details = new Map(resultOptions.map(option => [option.id, getDetails(option)]));
 
-        return { ok, details };
+        return { isCorrect, details };
     };
 
     return {
@@ -166,5 +166,5 @@ export const createQuizGameModel = (): QuizGameModel => {
 
 const getDetails = (option: QuestionOption): OptionDetails => ({
     message: option.message,
-    ok: option.correct,
+    isSuccess: option.correct,
 });

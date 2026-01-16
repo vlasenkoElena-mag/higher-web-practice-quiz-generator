@@ -2,14 +2,14 @@ import { getFirstElementOrFail } from '@/utils/dom-utils';
 import { makeValidator, parseJsonObject } from '@/utils/validation';
 import { quizSchema } from '@/schemas/quiz';
 import { createEventEmitter } from '@/utils/event-emitter';
-import type { JsonParsingError } from '@/errors/json-parsing.error';
-import type { ValidationError } from '@/errors/validation.error';
+import type { IllegalJsonError } from '@/errors/illegal-json-error';
+import type { QuizValidationError } from '@/errors/quiz-validation-error';
 import type { Observable } from '@/types/base';
 import type { Quiz, QuizData } from '@/types/quiz';
 
 export type QuizGeneratorViewEvents = {
     ['submit']: { quiz: QuizData; };
-    ['validation_error']: JsonParsingError | ValidationError;
+    ['validation_error']: IllegalJsonError | QuizValidationError;
 };
 
 export type QuizGeneratorView = Observable<QuizGeneratorViewEvents> & {
@@ -18,7 +18,7 @@ export type QuizGeneratorView = Observable<QuizGeneratorViewEvents> & {
 
 const validateQuizJson = makeValidator(quizSchema);
 
-type SafeParseResult = [JsonParsingError | ValidationError, null] | [null, QuizData];
+type SafeParseResult = [IllegalJsonError | QuizValidationError, null] | [null, QuizData];
 
 const safeParseQuizJson = (jsonString: string): SafeParseResult =>  {
     const [parsingErr, parsed] = parseJsonObject(jsonString);

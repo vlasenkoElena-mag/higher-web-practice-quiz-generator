@@ -30,7 +30,7 @@ export type QuizGameResultView = Renderer<ResultInfo> & Observable<QuizGameResul
 
 export type QuizCardFactory = (quiz: Quiz) => QuizCardView;
 
-export type QuestionOptionsView = Renderer<QuestionOptionsData> & {
+export type OptionsView = Renderer<QuestionOptionsData> & {
     readonly element: HTMLElement;
 };
 

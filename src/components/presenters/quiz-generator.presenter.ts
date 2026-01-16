@@ -2,7 +2,7 @@ import type { Initializer } from '@/types/base';
 import type { ErrorView } from '../view/view.types';
 import type { QuizGeneratorView } from '../view/quiz-generator.view';
 import type { QuizzesModel } from '../models/quizzes-model';
-import { JsonParsingError } from '@/errors/json-parsing.error';
+import { IllegalJsonError } from '@/errors/illegal-json-error';
 import { navigateTo } from '@/utils/location.utils';
 
 export type Deps = {
@@ -18,7 +18,7 @@ export const createQuizGeneratorPresenter = (deps: Deps): Initializer => {
         generatorView.on('submit', ({ quiz }) => model.add(quiz));
 
         generatorView.on('validation_error', err => {
-            const message = err instanceof JsonParsingError
+            const message = err instanceof IllegalJsonError
                 ? 'Ошибка: не удалось обработать JSON.'
                 : 'Ошибка: JSON-строка не соответствует схеме.';
                 

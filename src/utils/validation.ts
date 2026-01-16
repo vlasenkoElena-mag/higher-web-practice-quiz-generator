@@ -1,26 +1,26 @@
 import type { z } from 'zod';
-import { ValidationError } from '@/errors/validation.error';
-import { JsonParsingError } from '@/errors/json-parsing.error';
+import { QuizValidationError } from '@/errors/quiz-validation-error';
+import { IllegalJsonError } from '@/errors/illegal-json-error';
 
 type ValidatorFactory = <T extends z.ZodType>(schema: T) => (data: object) => ValidationResult<z.infer<T>>;
-type ValidationResult<T> = [ValidationError, null] | [null, T];
+type ValidationResult<T> = [QuizValidationError, null] | [null, T];
 
-export const parseJson = (jsonString: string): [ValidationError, null] | [null, unknown]  => {
+export const parseJson = (jsonString: string): [QuizValidationError, null] | [null, unknown]  => {
     try {
         const parsed = JSON.parse(jsonString);
         return [null, parsed];
     }
     catch (error) {
-        return [new JsonParsingError(error), null];
+        return [new IllegalJsonError(error), null];
     }
 };
 
-export const parseJsonObject = (jsonString: string): [ValidationError, null] | [null, object] =>
+export const parseJsonObject = (jsonString: string): [QuizValidationError, null] | [null, object] =>
     {
         const [err, parsed] = parseJson(jsonString)
 
         if (err !== null || !(typeof parsed === 'object' && parsed !== null)) {
-            return [new JsonParsingError('Parsed JSON is not an object'), null];
+            return [new IllegalJsonError('Parsed JSON is not an object'), null];
         }
 
         return [null, parsed];
@@ -32,5 +32,5 @@ export const makeValidator: ValidatorFactory
 
         return result.success
             ? [null, result.data]
-            : [new ValidationError(result.error.message), null];
+            : [new QuizValidationError(result.error.message), null];
     };

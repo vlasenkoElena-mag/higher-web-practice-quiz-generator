@@ -14,7 +14,7 @@ export type AnsweredOptionViewData = OptionViewData & {
     checked: boolean;
     result?: {
         message: string;
-        ok: boolean;
+        isSuccess: boolean;
     };
 };
 
