@@ -21,7 +21,7 @@ export const createQuizGeneratorPresenter = (deps: Deps): Initializer => {
             const message = err instanceof IllegalJsonError
                 ? 'Ошибка: не удалось обработать JSON.'
                 : 'Ошибка: JSON-строка не соответствует схеме.';
-                
+
             errorView.render({
                 message,
                 details: 'Проверьте формат данных и попробуйте снова.',

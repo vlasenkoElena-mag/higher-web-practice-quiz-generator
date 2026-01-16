@@ -23,7 +23,7 @@ export type QuizzesModelDeps = {
 
 export const createQuizzesModel = ({ db }: QuizzesModelDeps): QuizzesModel => {
     const ee = createEventEmitter<EventsMap>();
-    
+
     const add: QuizzesModel['add'] = async quizData => {
         try {
             const quiz = { id: nanoid(), ...quizData };
@@ -42,7 +42,7 @@ export const createQuizzesModel = ({ db }: QuizzesModelDeps): QuizzesModel => {
             return ee.emit('quizzes_loading_error', err);
         }
 
-        ee.emit('quizzes_loaded', { quizzes })
+        ee.emit('quizzes_loaded', { quizzes });
     };
 
     return { add, loadQuizzes, on: ee.on };

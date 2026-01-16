@@ -54,7 +54,7 @@ export const createQuizGameModel = (): QuizGameModel => {
     const ee = createEventEmitter<QuizGameEvents>();
 
     const start: I['start'] = async (getQuiz): Promise<void> => {
-        const [err, loadedQuiz]  = await getQuiz()
+        const [err, loadedQuiz] = await getQuiz();
 
         if (err !== null) {
             return ee.emit('quiz_getting_error', err);

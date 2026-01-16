@@ -25,7 +25,7 @@ const makeQuizStorage = (): I => {
         }
 
         return db;
-    }
+    };
 
     const connect = async () => {
         db = await openDB<Schema>(DB_NAME, DB_VERSION, {
@@ -35,9 +35,9 @@ const makeQuizStorage = (): I => {
                 }
             },
         });
-    }
+    };
 
-    const add: I['add']  = async quizData => {
+    const add: I['add'] = async quizData => {
         try {
             const quiz: Quiz = { id: nanoid(), ...quizData };
             await getDb().put(SCHEMA_NAME, quiz);
@@ -47,7 +47,7 @@ const makeQuizStorage = (): I => {
         catch (error) {
             return [new AddQuizError(error), null];
         }
-    }
+    };
 
     const get: I['get'] = async id => {
         try {
@@ -57,7 +57,7 @@ const makeQuizStorage = (): I => {
         catch (error) {
             return [new GetQuizError(error), null];
         }
-    }
+    };
 
     const getAll: I['getAll'] = async () => {
         try {
@@ -68,7 +68,7 @@ const makeQuizStorage = (): I => {
         catch (error) {
             return [new LoadQuizListError(error), null];
         }
-    }
+    };
 
     const clear: I['clear'] = async () => {
         try {
@@ -77,10 +77,10 @@ const makeQuizStorage = (): I => {
         catch (error) {
             throw new Error(`Failed to clear the database: ${error}`);
         }
-    }
+    };
 
     return { connect, add, clear, getAll, get };
-}
+};
 
 export const initDb = async () => {
     const storage = makeQuizStorage();

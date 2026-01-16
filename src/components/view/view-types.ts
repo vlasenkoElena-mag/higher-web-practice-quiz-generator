@@ -50,4 +50,3 @@ export type ResultInfo = {
     details: string;
     summary: string;
 };
-

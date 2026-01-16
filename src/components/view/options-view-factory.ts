@@ -16,26 +16,25 @@ type MarkedOptionData = {
     question: Question;
     selectedOptions: Set<number>;
     details: QuizAnswerResult['details'];
-}
+};
 
 export type OptionsViewFactory = {
-    createOptionsView(question: Question): OptionsView ;
+    createOptionsView(question: Question): OptionsView;
     createMarkedOptionsView(params: MarkedOptionData): OptionsView;
-}
+};
 
 type I = OptionsViewFactory;
 
 export const createOptionsViewFactory = ({
-        singleQuestionTemplate,
-        multipleQuestionTemplate,
-        radioOptionTemplate,
-        checkboxOptionTemplate,
-    }: Deps): OptionsViewFactory => {
-
+    singleQuestionTemplate,
+    multipleQuestionTemplate,
+    radioOptionTemplate,
+    checkboxOptionTemplate,
+}: Deps): OptionsViewFactory => {
     const createOptionsView: I['createOptionsView'] = question => makeQuestionOptionView({
         question,
         optionViews: makeOptionViews(question),
-    })
+    });
 
     const createMarkedOptionsView: I['createMarkedOptionsView'] = params => {
         const { question, selectedOptions, details } = params;
@@ -44,7 +43,7 @@ export const createOptionsViewFactory = ({
             question,
             optionViews: createAnsweredOptionViews({ question, selectedOptions, details }),
         });
-    }
+    };
 
     const makeQuestionOptionView = ({ question, optionViews }: { question: Question; optionViews: OptionView[] }): OptionsView => {
         const { type, text } = question;
@@ -53,15 +52,15 @@ export const createOptionsViewFactory = ({
         questionView.render({ optionElements: optionViews.map(it => it.element), text });
 
         return questionView;
-    }
+    };
 
     const getQuestionElement = (questionType: Question['type']): HTMLElement => questionType === 'single'
         ? singleQuestionTemplate.cloneNode(true) as HTMLElement
-        : multipleQuestionTemplate.cloneNode(true) as HTMLElement
+        : multipleQuestionTemplate.cloneNode(true) as HTMLElement;
 
     const getOptionElement = (questionType: Question['type']): HTMLElement => questionType === 'single'
         ? radioOptionTemplate.cloneNode(true) as HTMLElement
-        : checkboxOptionTemplate.cloneNode(true) as HTMLElement
+        : checkboxOptionTemplate.cloneNode(true) as HTMLElement;
 
     const makeOptionViews = ({ options, type }: Question): OptionView[] => {
         const optionElement = getOptionElement(type);
@@ -72,7 +71,7 @@ export const createOptionsViewFactory = ({
 
             return optionView;
         });
-    }
+    };
 
     const createAnsweredOptionViews = ({ question: { options, type }, selectedOptions, details }: {
         question: Question;
@@ -92,10 +91,10 @@ export const createOptionsViewFactory = ({
 
             return optionView;
         });
-    }
+    };
 
-    return { createOptionsView, createMarkedOptionsView }
-} 
+    return { createOptionsView, createMarkedOptionsView };
+};
 
 const createQuestionOptionsView = (element: HTMLElement): OptionsView => {
     const questionText = getFirstElementOrFail('.question__text', element);

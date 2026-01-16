@@ -1,4 +1,4 @@
-import type { QuestionOption, Question } from './quiz';
+import type { QuestionOption } from './quiz';
 
 export type ErrorDescription = {
     message: string;

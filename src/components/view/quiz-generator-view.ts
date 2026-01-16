@@ -5,10 +5,10 @@ import { createEventEmitter } from '@/utils/event-emitter';
 import type { IllegalJsonError } from '@/errors/illegal-json-error';
 import type { QuizValidationError } from '@/errors/quiz-validation-error';
 import type { Observable } from '@/types/base';
-import type { Quiz, QuizData } from '@/types/quiz';
+import type { QuizData } from '@/types/quiz';
 
 export type QuizGeneratorViewEvents = {
-    ['submit']: { quiz: QuizData; };
+    ['submit']: { quiz: QuizData };
     ['validation_error']: IllegalJsonError | QuizValidationError;
 };
 
@@ -20,7 +20,7 @@ const validateQuizJson = makeValidator(quizSchema);
 
 type SafeParseResult = [IllegalJsonError | QuizValidationError, null] | [null, QuizData];
 
-const safeParseQuizJson = (jsonString: string): SafeParseResult =>  {
+const safeParseQuizJson = (jsonString: string): SafeParseResult => {
     const [parsingErr, parsed] = parseJsonObject(jsonString);
 
     if (parsingErr !== null) {
@@ -54,7 +54,7 @@ export const createQuizGeneratorView = (element: HTMLElement): QuizGeneratorView
             return ee.emit('validation_error', err);
         }
 
-        ee.emit('submit', { quiz })
+        ee.emit('submit', { quiz });
     });
 
     textarea.addEventListener('input', () => {

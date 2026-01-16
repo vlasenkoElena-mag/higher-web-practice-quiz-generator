@@ -7,7 +7,7 @@ export type QuestionData = {
 };
 
 export type QuestionViewEvents = {
-    ['submit']: { selectedOptionIds: Set<number>; };
+    ['submit']: { selectedOptionIds: Set<number> };
     ['next_button_click']: undefined;
 };
 
@@ -57,7 +57,7 @@ export const createQuestionView = ({ element }: Deps): QuestionView => {
                 element.disabled = true;
             }
         });
-    }
+    };
 
     const renderAnsweredQuestion: QuestionView['renderAnsweredQuestion'] = ({ questionElement, nextButtonText }) => {
         questionContainer.replaceChildren(questionElement);

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {};
 
 type IsDefined = <T>(value: T | undefined) => value is T;

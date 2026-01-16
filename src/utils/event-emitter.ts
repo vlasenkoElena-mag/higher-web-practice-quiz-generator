@@ -28,7 +28,7 @@ export const createEventEmitter = <MessageMap extends object>() => {
      * Добавляет обработчик события
      */
     const onAll = (handler: (event: keyof MessageMap, payload: MessageMap[keyof MessageMap]) => void) => {
-        allEventsHandler.add(handler); 
+        allEventsHandler.add(handler);
     };
 
     const getHandlers = (eventName: keyof MessageMap): Set<Handler<MessageMap>> => {

@@ -1,6 +1,5 @@
-import type { ResultInfo } from './view-types';
+import type { ResultInfo, QuizGameResultView, QuizGameResultViewEvents } from './view-types';
 import { getFirstElementOrFail } from '@/utils/dom-utils';
-import type { QuizGameResultView, QuizGameResultViewEvents } from './view-types';
 import { createEventEmitter } from '@/utils/event-emitter';
 
 type Deps = { element: HTMLElement };
