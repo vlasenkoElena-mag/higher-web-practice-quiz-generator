@@ -2,11 +2,11 @@ import { type DBSchema, type IDBPDatabase, openDB } from 'idb';
 import { v7 as uuidV7 } from 'uuid';
 import { isNil } from './utils';
 import { QuizNotFoundError } from '@/errors/quiz-not-found';
-import { QuizGettingError } from '@/errors/quiz-getting-error';
-import { QuizAddingError } from '@/errors/quiz-adding.error';
-import { QuizzesLoadingError } from '@/errors/quizzes-loading.error';
-import type { Quiz, QuizData } from '@/types/quiz';
-import type { AddQuizResult, GetQuizResult, LoadQuizzesResult, QuizStorage } from '@/types/base';
+import { GetQuizError } from '@/errors/get-quiz-error';
+import { AddQuizError } from '@/errors/add-auiz-error';
+import { LoadQuizListError } from '@/errors/load-quiz-list-error';
+import type { Quiz } from '@/types/quiz';
+import type { QuizStorage as I } from '@/types/base';
 
 const DB_NAME = 'quiz-generator';
 const SCHEMA_NAME = 'quizzes';
@@ -16,78 +16,74 @@ type Schema = {
     [SCHEMA_NAME]: { key: string; value: Quiz };
 } & DBSchema;
 
-class QuizIndexedDbStorage implements QuizStorage {
-    #dao: IDBPDatabase<Schema> | null;
+const makeQuizStorage = (): I => {
+    let db: IDBPDatabase<Schema> | null = null;
 
-    constructor() {
-        this.#dao = null;
-    }
-
-    get #db(): IDBPDatabase<Schema> {
-        if (isNil(this.#dao)) {
-            throw new Error('Database not initialized. Call init() before using the storage.');
+    const getDb = (): IDBPDatabase<Schema> => {
+        if (isNil(db)) {
+            throw new Error('Database not connected.');
         }
 
-        return this.#dao;
+        return db;
     }
 
-    async init() {
-        const dao = await openDB<Schema>(DB_NAME, DB_VERSION, {
+    const connect = async () => {
+        db = await openDB<Schema>(DB_NAME, DB_VERSION, {
             upgrade(db) {
                 if (!db.objectStoreNames.contains(SCHEMA_NAME)) {
                     db.createObjectStore(SCHEMA_NAME, { keyPath: 'id' });
                 }
             },
         });
-
-        this.#dao = dao;
     }
 
-    async add(quizData: QuizData): Promise<AddQuizResult> {
+    const add: I['add']  = async quizData => {
         try {
             const quiz: Quiz = { id: uuidV7(), ...quizData };
-            await this.#db.put(SCHEMA_NAME, quiz);
+            await getDb().put(SCHEMA_NAME, quiz);
 
             return [null, quiz];
         }
         catch (error) {
-            return [new QuizAddingError(error), null];
+            return [new AddQuizError(error), null];
         }
     }
 
-    async get(id: string): Promise<GetQuizResult> {
+    const get: I['get'] = async id => {
         try {
-            const quiz = await this.#db.get(SCHEMA_NAME, id);
+            const quiz = await getDb().get(SCHEMA_NAME, id);
             return isNil(quiz) ? [new QuizNotFoundError(id), null] : [null, quiz];
         }
         catch (error) {
-            return [new QuizGettingError(error), null];
+            return [new GetQuizError(error), null];
         }
     }
 
-    async getList(): Promise<LoadQuizzesResult> {
+    const getAll: I['getAll'] = async () => {
         try {
-            const quizzes = await this.#db.getAll(SCHEMA_NAME);
+            const quizzes = await getDb().getAll(SCHEMA_NAME);
 
             return [null, quizzes];
         }
         catch (error) {
-            return [new QuizzesLoadingError(error), null];
+            return [new LoadQuizListError(error), null];
         }
     }
 
-        async clear(): Promise<void> {
+    const clear: I['clear'] = async () => {
         try {
-            await this.#db.clear(SCHEMA_NAME);
+            await getDb().clear(SCHEMA_NAME);
         }
         catch (error) {
             throw new Error(`Failed to clear the database: ${error}`);
         }
     }
+
+    return { connect, add, clear, getAll, get };
 }
 
 export const initDb = async () => {
-    const storage = new QuizIndexedDbStorage();
-    await storage.init();
+    const storage = makeQuizStorage();
+    await storage.connect();
     return storage;
 };

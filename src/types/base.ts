@@ -43,7 +43,9 @@ export type LoadQuizzesResult = [LoadQuizListError, null] | [null, Quiz[]];
 export type AddQuizResult = [AddQuizError, null] | [null, Quiz];
 
 export type QuizStorage = {
+    connect(): Promise<void>;
     add(quiz: QuizData): Promise<AddQuizResult>;
     get(id: string): Promise<GetQuizResult>;
     getAll(): Promise<LoadQuizzesResult>;
+    clear(): Promise<void>;
 };
