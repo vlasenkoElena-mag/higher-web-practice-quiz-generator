@@ -1,5 +1,4 @@
 import { type DBSchema, type IDBPDatabase, openDB } from 'idb';
-import { v7 as uuidV7 } from 'uuid';
 import { isNil } from './utils';
 import { QuizNotFoundError } from '@/errors/quiz-not-found';
 import { GetQuizError } from '@/errors/get-quiz-error';
@@ -7,6 +6,7 @@ import { AddQuizError } from '@/errors/add-auiz-error';
 import { LoadQuizListError } from '@/errors/load-quiz-list-error';
 import type { Quiz } from '@/types/quiz';
 import type { QuizStorage as I } from '@/types/base';
+import { nanoid } from 'nanoid';
 
 const DB_NAME = 'quiz-generator';
 const SCHEMA_NAME = 'quizzes';
@@ -39,7 +39,7 @@ const makeQuizStorage = (): I => {
 
     const add: I['add']  = async quizData => {
         try {
-            const quiz: Quiz = { id: uuidV7(), ...quizData };
+            const quiz: Quiz = { id: nanoid(), ...quizData };
             await getDb().put(SCHEMA_NAME, quiz);
 
             return [null, quiz];

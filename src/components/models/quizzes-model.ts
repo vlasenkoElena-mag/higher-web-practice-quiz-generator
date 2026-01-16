@@ -1,9 +1,9 @@
-import { v7 as uuidV7 } from 'uuid';
 import { AddQuizError } from '@/errors/add-auiz-error';
 import type { Observable, QuizStorage } from '@/types/base';
 import type { Quiz, QuizData } from '@/types/quiz';
 import type { LoadQuizListError } from '@/errors/load-quiz-list-error';
 import { createEventEmitter } from '@/utils/event-emitter';
+import { nanoid } from 'nanoid';
 
 export type EventsMap = {
     ['quizzes_loaded']: { quizzes: Quiz[] };
@@ -26,7 +26,7 @@ export const createQuizzesModel = ({ db }: QuizzesModelDeps): QuizzesModel => {
     
     const add: QuizzesModel['add'] = async quizData => {
         try {
-            const quiz = { id: uuidV7(), ...quizData };
+            const quiz = { id: nanoid(), ...quizData };
             await db.add(quiz);
             ee.emit('quiz_added', { quiz });
         }

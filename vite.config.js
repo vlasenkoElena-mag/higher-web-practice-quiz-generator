@@ -29,6 +29,6 @@ export default defineConfig({
 		}
 	},
 	optimizeDeps: {
-		include: ['zod', 'idb', 'uuid']
+		include: ['zod', 'idb', 'nanoid']
 	}
 });
