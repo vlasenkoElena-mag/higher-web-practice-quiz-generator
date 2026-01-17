@@ -1,6 +1,7 @@
 import type { Renderer } from '@/types/base';
 import type { ErrorDescription } from '@/types/view';
 import { getFirstElementOrFail } from '@/utils/dom-utils';
+import { navigateTo } from '@/utils/location.utils';
 
 export const createErrorView = (element: HTMLElement): Renderer<ErrorDescription> => {
     const messageElement = getFirstElementOrFail('.toast__title', element);
@@ -18,6 +19,7 @@ export const createErrorView = (element: HTMLElement): Renderer<ErrorDescription
         element.hidden = true;
         overlayElement?.classList.remove('active');
         document.body.classList.remove('toast-open');
+        navigateTo('/');
     };
 
     const setDescription = ({ message, details }: ErrorDescription) => {

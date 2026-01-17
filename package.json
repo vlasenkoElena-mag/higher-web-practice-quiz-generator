@@ -1,13 +1,14 @@
 {
 	"name": "quizzer",
 	"version": "1.0.0",
+	"type": "module",
 	"description": "",
 	"author": "Elena Vlasenko",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"lint": "eslint .",
-		"lint:fix": "eslint . --fix"
+		"lint": "eslint src",
+		"lint:fix": "eslint . --fix src"
 	},
 	"dependencies": {
 		"idb": "8.0.3",

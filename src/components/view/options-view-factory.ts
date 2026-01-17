@@ -23,20 +23,18 @@ export type OptionsViewFactory = {
     createMarkedOptionsView(params: MarkedOptionData): OptionsView;
 };
 
-type I = OptionsViewFactory;
-
 export const createOptionsViewFactory = ({
     singleQuestionTemplate,
     multipleQuestionTemplate,
     radioOptionTemplate,
     checkboxOptionTemplate,
 }: Deps): OptionsViewFactory => {
-    const createOptionsView: I['createOptionsView'] = question => makeQuestionOptionView({
+    const createOptionsView: OptionsViewFactory['createOptionsView'] = question => makeQuestionOptionView({
         question,
         optionViews: makeOptionViews(question),
     });
 
-    const createMarkedOptionsView: I['createMarkedOptionsView'] = params => {
+    const createMarkedOptionsView: OptionsViewFactory['createMarkedOptionsView'] = params => {
         const { question, selectedOptions, details } = params;
 
         return makeQuestionOptionView({

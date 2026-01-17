@@ -43,8 +43,6 @@ export type QuizGameModel = {
     restart: () => void;
 } & Observable<QuizGameEvents>;
 
-type I = QuizGameModel;
-
 export const createQuizGameModel = (): QuizGameModel => {
     let questionIndex = 0;
     let correctAnswers = 0;
@@ -53,7 +51,7 @@ export const createQuizGameModel = (): QuizGameModel => {
 
     const ee = createEventEmitter<QuizGameEvents>();
 
-    const start: I['start'] = async (getQuiz): Promise<void> => {
+    const start: QuizGameModel['start'] = async (getQuiz): Promise<void> => {
         const [err, loadedQuiz] = await getQuiz();
 
         if (err !== null) {
@@ -65,7 +63,7 @@ export const createQuizGameModel = (): QuizGameModel => {
         publishQuestion();
     };
 
-    const addAnswer: I['addAnswer'] = selectedOptionIds => {
+    const addAnswer: QuizGameModel['addAnswer'] = selectedOptionIds => {
         if (done) {
             return;
         };
@@ -102,7 +100,7 @@ export const createQuizGameModel = (): QuizGameModel => {
         }
     };
 
-    const restart: I['restart'] = (): void => {
+    const restart: QuizGameModel['restart'] = (): void => {
         reset();
         publishQuestion();
     };

@@ -24,17 +24,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Затемнение */
-    z-index: 1; /* Выше всего контента, но ниже toast */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
     display: none;
-    pointer-events: auto; /* Блокирует все клики */
+    pointer-events: auto;
 }
 
 .toast-overlay.active {
     display: block;
 }
 
-/* Запрещаем прокрутку страницы когда toast открыт */
 body.toast-open {
     overflow: hidden;
 }

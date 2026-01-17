@@ -20,7 +20,7 @@ const extractUrlQuizId = (): string => {
         navigateTo('./quizzes.html');
     }
 
-    return id as string;
+    return id as string; // Комментарий: значение будет string, т.к. navigateTo вызывает перезагрузку приложения
 };
 
 const quizId = extractUrlQuizId();

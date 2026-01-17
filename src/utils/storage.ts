@@ -5,7 +5,7 @@ import { GetQuizError } from '@/errors/get-quiz-error';
 import { AddQuizError } from '@/errors/add-auiz-error';
 import { LoadQuizListError } from '@/errors/load-quiz-list-error';
 import type { Quiz } from '@/types/quiz';
-import type { QuizStorage as I } from '@/types/base';
+import type { QuizStorage } from '@/types/base';
 import { nanoid } from 'nanoid';
 
 const DB_NAME = 'quiz-generator';
@@ -16,7 +16,7 @@ type Schema = {
     [SCHEMA_NAME]: { key: string; value: Quiz };
 } & DBSchema;
 
-const makeQuizStorage = (): I => {
+const makeQuizStorage = (): QuizStorage => {
     let db: IDBPDatabase<Schema> | null = null;
 
     const getDb = (): IDBPDatabase<Schema> => {
@@ -37,7 +37,7 @@ const makeQuizStorage = (): I => {
         });
     };
 
-    const add: I['add'] = async quizData => {
+    const add: QuizStorage['add'] = async quizData => {
         try {
             const quiz: Quiz = { id: nanoid(), ...quizData };
             await getDb().put(SCHEMA_NAME, quiz);
@@ -49,7 +49,7 @@ const makeQuizStorage = (): I => {
         }
     };
 
-    const get: I['get'] = async id => {
+    const get: QuizStorage['get'] = async id => {
         try {
             const quiz = await getDb().get(SCHEMA_NAME, id);
             return isNil(quiz) ? [new QuizNotFoundError(id), null] : [null, quiz];
@@ -59,7 +59,7 @@ const makeQuizStorage = (): I => {
         }
     };
 
-    const getAll: I['getAll'] = async () => {
+    const getAll: QuizStorage['getAll'] = async () => {
         try {
             const quizzes = await getDb().getAll(SCHEMA_NAME);
 
@@ -70,7 +70,7 @@ const makeQuizStorage = (): I => {
         }
     };
 
-    const clear: I['clear'] = async () => {
+    const clear: QuizStorage['clear'] = async () => {
         try {
             await getDb().clear(SCHEMA_NAME);
         }
